@@ -51,7 +51,7 @@ jobs:
       - name: Install dependencies
         shell: bash
         run: |
-          ./breakpad.${{ matrix.shell_ext }}
+          ./accelerator/breakpad.${{ matrix.shell_ext }}
 
       - name: Install Linux dependencies
         if: startsWith(runner.os, 'Linux')

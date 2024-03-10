@@ -15,17 +15,14 @@ jobs:
           - os: windows-latest
             os_short: win
             compiler_cc: msvc
-            shell_ext: bat
           - os: ubuntu-latest
             os_short: linux
             compiler_cc: clang
             compiler_cxx: clang++
-            shell_ext: sh
           - os: ubuntu-20.04
             os_short: linux
             compiler_cc: clang-8
             compiler_cxx: clang++-8
-            shell_ext: sh
       fail-fast: false
     runs-on: ${{ matrix.os }}
     name: ${{ matrix.os_short }}-${{ matrix.compiler_cc }}
@@ -50,9 +47,10 @@ jobs:
           python -m pip install --upgrade pip setuptools wheel httplib2
 
       - name: Install dependencies
+        working-directory: accelerator
         shell: bash
         run: |
-          ./accelerator/breakpad.${{ matrix.shell_ext }}
+          ./breakpad.sh
 
       - name: Install Linux dependencies
         if: startsWith(runner.os, 'Linux')
